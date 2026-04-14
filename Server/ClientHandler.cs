@@ -38,7 +38,7 @@ class ClientHandler{
                 }
                 Console.WriteLine($"[LARGUAR] {info.Username} u largua. Aktiv: {Server.ActiveClients.Count}");
             }
-            tcpClient.Close();
+            TcpClient.Close();
         }
     }
 
@@ -84,7 +84,7 @@ class ClientHandler{
             lock(Server.LockObject){
                 Server.AllMessages.Add($"[{DateTime.Now:HH:mm:ss}] {info.Username}: {message}");
                 info.MessageCount++;
-                info>LastMessage = message;
+                info.LastMessage = message;
             }
 
             string response = FileManager.ProcessCommand(message, info.Role);
