@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Server
 {
@@ -27,6 +28,22 @@ namespace Server
 
             listener = new HttpListener();
             listener.Prefixes.Add($"http://{host}:{port}/");
+        }
+
+        public async Task StartAsync()
+        {
+            listener.Start();
+            Console.WriteLine($"[HTTP] Serveri u nis ne portin {port}");
+            await Task.CompletedTask;
+        }
+
+        public void Stop(){
+            if (listener.IsListening){
+                listener.Stop();
+            }
+
+            listener.Close();
+            Console.WriteLine("[HTTP] Serveri u ndal.");
         }
     }
 }
