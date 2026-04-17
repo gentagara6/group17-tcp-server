@@ -73,8 +73,10 @@ public static class FileManager {
         }
 
         FileInfo info = new FileInfo(path);
-        return $"Emri: {info.Name}\nMadhesia: {info.Length} bytes\nKrijuar: {info.CreationTime}\n + $Modifikuar: {info.LastWriteTime}";
-
+        return $"Emri: {info.Name}\n" +
+        $"Madhesia: {info.Length} bytes\n" +
+        $"Krijuar: {info.CreationTime}\n" +
+        $"Modifikuar: {info.LastWriteTime}";
     }
 
     public static string ProcessCommand(string command, string role) {
@@ -84,7 +86,7 @@ public static class FileManager {
         string arg = parts.Length > 1 ? parts[1] : "";
 
         if (role != "admin") {
-            if (cmd != "/list" && cmd != "/read") {
+            if (cmd != "/list" && cmd != "/read" && cmd != "/search" && cmd != "/info") {
                 return "Nuk keni privilegje per kete komande!";
             }
         }
