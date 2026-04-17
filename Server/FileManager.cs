@@ -22,7 +22,7 @@ public static class FileManager {
         string path = Path.Combine(folderPath, fileName);
 
         if (!File.Exists(path)) {
-            return "Fajlli nuk u gjet";
+            return "Fajlli nuk ekziston";
         }
         return File.ReadAllText(path);
     }
@@ -47,11 +47,34 @@ public static class FileManager {
         string path = Path.Combine(folderPath, fileName);
 
         if (!File.Exists(path)) {
-            return "Fajlli nuk u gjet";
+            return "Fajlli nuk ekziston";
         }
 
         File.Delete(path);
         return "Fajlli u fshi me sukses";
+    }
+
+    public static string SearchFiles(string keyword){
+        var files = Directory.GetFiles(folderPath)
+            .Where(f => Path.GetFileName(f).Contains(keyword, StringComparison.OrdinalIgnoreCase))
+            .Select(Path.GetFileName);
+
+            if (!files.Any())
+                return "Nuk u gjet asnje fajll";
+
+            return string.Join("\n", files);
+    }
+
+    public static string GetFileInfo(string fileName) {
+        string path = Path.Combine(folderPath, fileName);
+
+        if (!File.Exists(path)) {
+            return "Fajlli nuk ekziston";
+        }
+
+        FileInfo info = new FileInfo(path);
+        return $"Emri: {info.Name}\nMadhesia: {info.Length} bytes\nKrijuar: {info.CreationTime}\n + $Modifikuar: {info.LastWriteTime}";
+
     }
 
     public static string ProcessCommand(string command, string role) {
@@ -60,10 +83,8 @@ public static class FileManager {
         string cmd = parts[0].ToLower();
         string arg = parts.Length > 1 ? parts[1] : "";
 
-        if (role != "admin")
-        {
-            if (cmd != "/list" && cmd != "/read")
-            {
+        if (role != "admin") {
+            if (cmd != "/list" && cmd != "/read") {
                 return "Nuk keni privilegje per kete komande!";
             }
         }
@@ -78,8 +99,18 @@ public static class FileManager {
             case "/upload":
                 return WriteFile(arg, "Text content");
 
+            case "/download":
+                byte[] fileData = DownloadFile(arg);
+                return fileData != null ? $"Fajlli {arg} u shkarkua me sukses" : "Fajlli nuk ekziston";
+
             case "/delete":
                 return DeleteFile(arg);
+
+            case "/search":
+                return SearchFiles(arg);
+
+            case "/info":
+                return GetFileInfo(arg);
 
             default:
                 return "Komande e panjohur";
