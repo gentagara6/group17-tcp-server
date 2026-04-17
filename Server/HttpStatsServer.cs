@@ -30,13 +30,16 @@ namespace Server
             listener.Prefixes.Add($"http://{host}:{port}/");
         }
 
-        public async Task StartAsync()
-        {
+        public async Task StartAsync(){
             listener.Start();
             Console.WriteLine($"[HTTP] Serveri u nis ne portin {port}");
-            await Task.CompletedTask;
-        }
 
+            while(listener.IsListening){
+                HttpListenerContext context = await listener.GetContextAsync();
+                Console.WriteLine("[HTTP] Kerkese e re u pranua");
+            }
+            
+        }
         public void Stop(){
             if (listener.IsListening){
                 listener.Stop();
