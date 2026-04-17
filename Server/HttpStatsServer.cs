@@ -34,9 +34,9 @@ namespace Server
             listener.Start();
             Console.WriteLine($"[HTTP] Serveri u nis ne portin {port}");
 
-            while(listener.IsListening){
-                HttpListenerContext context = await listener.GetContextAsync();
-                Console.WriteLine("[HTTP] Kerkese e re u pranua");
+           while (listener.IsListening){
+            HttpListenerContext context = await listener.GetContextAsync();
+            await HandleRequest(context);
             }
             
         }
@@ -47,6 +47,16 @@ namespace Server
 
             listener.Close();
             Console.WriteLine("[HTTP] Serveri u ndal.");
+        }
+
+        private async Task HandleRequest(HttpListenerContext context){
+            
+            Console.WriteLine("[HTTP] Duke trajtuar kerkesen...");
+
+            context.Response.StatusCode = 200;
+            byte[] buffer = System.Text.Encoding.UTF8.GetBytes("Serveri eshte aktiv");
+            await context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+            context.Response.Close();
         }
     }
 }
