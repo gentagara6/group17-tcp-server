@@ -1,0 +1,26 @@
+# Build folders
+bin/
+obj/
+
+# Compiled binaries
+*.exe
+*.dll
+*.pdb
+
+# Runtime / build artifacts
+*.runtimeconfig.json
+*.assets.cache
+*.assets.cache.json
+project.assets.json
+
+# Visual Studio / IDE
+.vs/
+*.user
+*.suo
+
+# Generated files
+*.AssemblyInfo.cs
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.FileListAbsolute.txt
+*.cache.json
+*.sourceLink.json
