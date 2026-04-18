@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Server
 {
@@ -50,11 +51,44 @@ namespace Server
         }
 
         private async Task HandleRequest(HttpListenerContext context){
-            
-            Console.WriteLine("[HTTP] Duke trajtuar kerkesen...");
+            string path = context.Request.Url?.AbsolutePath?.ToLower() ?? "/";
+            string method = context.Request.HttpMethod.ToUpper();
 
-            context.Response.StatusCode = 200;
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes("Serveri eshte aktiv");
+            if (method != "GET"){
+                await SendResponse(context, 405, "Only GET method is allowed.");
+                return;
+            }
+
+            if (path == "/"){
+                string html = @"
+            <html>
+            <head>
+                <meta charset='UTF-8'>
+                <title>Server Stats</title>
+            </head>
+            <body>
+                <h2>HTTP Stats Server</h2>
+                <p>Available endpoints:</p>
+                <ul>
+                    <li><a href='/stats'>/stats</a></li>
+                </ul>
+            </body>
+            </html>";
+
+            await SendResponse(context, 200, html, "text/html");
+            return;
+            }
+
+            await SendResponse(context, 404, "404 Not Found");
+        }
+
+        private async Task SendResponse(HttpListenerContext context, int statusCode, string content, string contentType = "text/plain"){
+            byte[] buffer = Encoding.UTF8.GetBytes(content);
+
+            context.Response.StatusCode = statusCode;
+            context.Response.ContentType = contentType + "; charset=utf-8";
+            context.Response.ContentLength64 = buffer.Length;
+
             await context.Response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
             context.Response.Close();
         }
