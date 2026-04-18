@@ -4,6 +4,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using System.Net.WebSockets;
 
 class Server{
     public static string IP = "0.0.0.0";
@@ -16,7 +18,15 @@ class Server{
 
 
     static void Main(string[] args){
-        Thread httpThread = new Thread(HttpStatsServer.Start);
+
+        var httpServer = new HttpStatsServer(8080, () => new ServerStats{
+            ActiveConnections = ActiveClients.Count,
+            ClientIps = ActiveClients.Select(c => c.IP).ToList(),
+            TotalMessages = AllMessages.Count,
+            ClientMessages = AllMessages.TakeLast(20).ToList()
+        });
+
+        Thread httpThread = new Thread(() => httpServer.StartAsync().Wait());
         httpThread.IsBackground = true;
         httpThread.Start();
         Console.Write("[SERVER] HTTP Stats Server filloi ne port 8080");
@@ -28,7 +38,7 @@ class Server{
 
         while(true){
             TcpClient client = listener.AcceptTcpClient();
-            string clientIP = ((IPEndPoint)client.RemoteEndPoint).Adders.ToString();
+            string clientIP = ((IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
 
             lock(LockObject){
                 if(ActiveClients.Count >= MAX_CLIENTS){
