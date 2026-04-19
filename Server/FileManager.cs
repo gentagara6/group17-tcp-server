@@ -13,7 +13,10 @@ public static class FileManager {
     }
 
     public static string ListFiles() {
-        var files = Directory.GetFiles(folderPath);
+        var files = Directory.GetFiles(folderPath).Select(Path.GetFileName);
+    
+        if (!files.Any())
+            return "Nuk ka fajlla ne folder";
 
         return string.Join("\n", files.Select(Path.GetFileName));    
     } 
@@ -34,7 +37,7 @@ public static class FileManager {
         return "Fajlli u shkrua me sukses";
     }
 
-    public static byte[] DownloadFile(string fileName) {
+    public static byte[]? DownloadFile(string fileName) {
         string path = Path.Combine(folderPath, fileName);
 
         if (!File.Exists(path)) {
