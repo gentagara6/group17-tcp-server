@@ -59,11 +59,11 @@ class Server{
     }
 
     public class ClientInfo{
-        public string Username{get; set;}
-        public string IP{get;set;}
-        public string Role{get;set;}
+        public string Username{get; set;} = "";
+        public string IP{get;set;} = "";
+        public string Role{get;set;} = "";
         public DateTime ConnectedAt{get;set;}
         public int MessageCount{get;set;}
-        public string LastMessage{get;set;}
+        public string LastMessage{get;set;} = "";
     }
 }

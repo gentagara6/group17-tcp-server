@@ -9,7 +9,7 @@ class ClientHandler{
     public static void Handle(TcpClient TcpClient, string clientIP){
         NetworkStream stream = TcpClient.GetStream();
         stream.ReadTimeout = TIMEOUT_SECONDS * 1000;
-        Server.ClientInfo info = null;
+        Server.ClientInfo? info = null;
 
         try{
             info = DoLogin(stream, clientIP);
@@ -42,7 +42,7 @@ class ClientHandler{
         }
     }
 
-    private static Server.ClientInfo DoLogin(NetworkStream stream, string clientIP){
+    private static Server.ClientInfo? DoLogin(NetworkStream stream, string clientIP){
         Send(stream, "USERNAME:");
         string username = Receive(stream);
 

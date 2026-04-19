@@ -1,4 +1,3 @@
-
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -10,7 +9,7 @@ class Client
     static string SERVER_IP = "127.0.0.1";
     static int SERVER_PORT = 5000;
 
-    static NetworkStream stream;
+    static NetworkStream? stream;
     static string currentRole = "";
     static string currentUsername = "";
 
@@ -18,7 +17,7 @@ class Client
     {
         Console.WriteLine("=== KLIENTI - Grupi 17 ===");
         Console.Write("Shkruaj IP-ne e serverit (Enter per localhost): ");
-        string inputIP = Console.ReadLine().Trim();
+        string inputIP = Console.ReadLine()?.Trim() ?? "";
         if (!string.IsNullOrEmpty(inputIP))
             SERVER_IP = inputIP;
 
