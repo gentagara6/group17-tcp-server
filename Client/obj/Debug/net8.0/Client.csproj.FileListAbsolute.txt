@@ -1,0 +1,15 @@
+/home/johan/group17-tcp-server/Client/bin/Debug/net8.0/Client
+/home/johan/group17-tcp-server/Client/bin/Debug/net8.0/Client.deps.json
+/home/johan/group17-tcp-server/Client/bin/Debug/net8.0/Client.runtimeconfig.json
+/home/johan/group17-tcp-server/Client/bin/Debug/net8.0/Client.dll
+/home/johan/group17-tcp-server/Client/bin/Debug/net8.0/Client.pdb
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.GeneratedMSBuildEditorConfig.editorconfig
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.AssemblyInfoInputs.cache
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.AssemblyInfo.cs
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.csproj.CoreCompileInputs.cache
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.sourcelink.json
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.dll
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/refint/Client.dll
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.pdb
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/Client.genruntimeconfig.cache
+/home/johan/group17-tcp-server/Client/obj/Debug/net8.0/ref/Client.dll

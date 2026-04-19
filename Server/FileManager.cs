@@ -99,7 +99,9 @@ public static class FileManager {
                 return ReadFile(arg);
 
             case "/upload":
-                return WriteFile(arg, "Text content");
+                int idx = arg.IndexOf('|');
+                if (idx == -1) return "Format gabim! Perdor: /upload emri.txt|permbajtja";
+                return WriteFile(arg.Substring(0, idx), arg.Substring(idx + 1));
 
             case "/download":
                 byte[] fileData = DownloadFile(arg);

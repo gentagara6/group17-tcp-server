@@ -5,7 +5,6 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using System.Net.WebSockets;
 
 class Server{
     public static string IP = "0.0.0.0";
@@ -57,13 +56,12 @@ class Server{
             t.Start();
         }
     }
-
-    public class ClientInfo{
-        public string Username{get; set;}
-        public string IP{get;set;}
-        public string Role{get;set;}
-        public DateTime ConnectedAt{get;set;}
-        public int MessageCount{get;set;}
-        public string LastMessage{get;set;}
-    }
+}
+public class ClientInfo{
+    public string Username{get; set;}
+    public string IP{get;set;}
+    public string Role{get;set;}
+    public DateTime ConnectedAt{get;set;}
+    public int MessageCount{get;set;}
+    public string LastMessage{get;set;}
 }
