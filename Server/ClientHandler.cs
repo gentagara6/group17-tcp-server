@@ -9,7 +9,7 @@ class ClientHandler{
     public static void Handle(TcpClient TcpClient, string clientIP){
         NetworkStream stream = TcpClient.GetStream();
         stream.ReadTimeout = TIMEOUT_SECONDS * 1000;
-        Server.ClientInfo? info = null;
+        ClientInfo? info = null;
 
         try{
             info = DoLogin(stream, clientIP);
@@ -42,7 +42,7 @@ class ClientHandler{
         }
     }
 
-    private static Server.ClientInfo? DoLogin(NetworkStream stream, string clientIP){
+    private static ClientInfo? DoLogin(NetworkStream stream, string clientIP){
         Send(stream, "USERNAME:");
         string username = Receive(stream);
 
@@ -56,7 +56,7 @@ class ClientHandler{
             return null;
         }
 
-        return new Server.ClientInfo{
+        return new ClientInfo{
             Username = username,
             IP = clientIP,
             Role = role,
@@ -74,7 +74,7 @@ class ClientHandler{
         return null;
     }
 
-    private static void ReceiveLoop(NetworkStream stream, Server.ClientInfo info){
+    private static void ReceiveLoop(NetworkStream stream, ClientInfo info){
         while(true){
             string message = Receive(stream);
             if(string.IsNullOrEmpty(message)) break;
