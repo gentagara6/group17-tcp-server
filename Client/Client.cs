@@ -56,7 +56,7 @@ class Client
 
                 if (input == "/exit")
                 {
-                    Console.WriteLine("Duke u shkeppur...");
+                    Console.WriteLine("Duke u shkeputur...");
                     break;
                 }
 
@@ -154,7 +154,7 @@ class Client
             }
             catch
             {
-                Console.WriteLine("\n[SHKEPPUR] Lidhja me serverin u pre.");
+                Console.WriteLine("\n[SHKEPUTUR] Lidhja me serverin u pre.");
                 break;
             }
         }

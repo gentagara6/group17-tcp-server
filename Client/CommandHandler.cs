@@ -42,7 +42,7 @@ class CommandHandler
             Console.WriteLine("  /info <file>          - Info per file");
             Console.WriteLine("\n  [/upload /download /delete - vetem admin]");
         }
-        Console.WriteLine("  /exit                 - Shkeppu");
+        Console.WriteLine("  /exit                 - Shkeputu");
         Console.WriteLine("========================================\n");
     }
 

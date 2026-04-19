@@ -49,7 +49,7 @@ class ClientHandler{
         Send(stream, "PASSWORD:");
         string password = Receive(stream);
 
-        string role = Authenticate(username, password);
+        string? role = Authenticate(username, password);
         if(role == null){
             Send(stream, "LOGIN_FAILED");
             Console.WriteLine($"[LOGIN DESHTOI] {clientIP} tentoi me {username}");
@@ -66,7 +66,7 @@ class ClientHandler{
         };
     }
 
-    private static string Authenticate(string username, string password){
+    private static string? Authenticate(string username, string password){
         if (username == "admin" && password == "admin123")   return "admin";
         if (username == "user1"  && password == "user123")   return "read";
         if (username == "user2"  && password == "user123")   return "read";

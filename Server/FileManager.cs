@@ -107,7 +107,7 @@ public static class FileManager {
                 return WriteFile(arg.Substring(0, idx), arg.Substring(idx + 1));
 
             case "/download":
-                byte[] fileData = DownloadFile(arg);
+                byte[]? fileData = DownloadFile(arg);
                 return fileData != null ? $"Fajlli {arg} u shkarkua me sukses" : "Fajlli nuk ekziston";
 
             case "/delete":
